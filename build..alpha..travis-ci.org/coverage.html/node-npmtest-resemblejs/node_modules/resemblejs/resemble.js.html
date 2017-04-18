@@ -1,0 +1,2348 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for node-npmtest-resemblejs/node_modules/resemblejs/resemble.js</title>
+    <meta charset="utf-8">
+    <style>
+        body, html {
+            margin:0; padding: 0;
+        }
+        body {
+            font-family: Arial, Helvetica;
+            font-size: 10pt;
+        }
+        div.header, div.footer {
+            background: #eee;
+            padding: 1em;
+        }
+        div.header {
+            height: 160px;
+            padding: 0 1em 0 1em;
+            z-index: 100;
+            position: fixed;
+            top: 0;
+            border-bottom: 1px solid #666;
+            width: 100%;
+        }
+        div.footer {
+            border-top: 1px solid #666;
+        }
+        div.body {
+            margin-top: 170px;
+        }
+        div.meta {
+            font-size: 90%;
+            text-align: center;
+        }
+        h1, h2, h3 {
+            font-weight: normal;
+        }
+        h1 {
+            font-size: 12pt;
+        }
+        h2 {
+            font-size: 10pt;
+        }
+        pre {
+            font-family: Menlo, Monaco, Consolas, Courier New, monospace;
+            margin: 0;
+            padding: 0;
+            font-size: 14px;
+            tab-size: 2;
+        }
+
+        div.path { font-size: 110%; }
+        div.path a:link, div.path a:visited { color: #000; }
+        table.coverage { border-collapse: collapse; margin:0; padding: 0 }
+
+        table.coverage td {
+            margin: 0;
+            padding: 0;
+            color: #111;
+            vertical-align: top;
+        }
+        table.coverage td.line-count {
+            width: 50px;
+            text-align: right;
+            padding-right: 5px;
+        }
+        table.coverage td.line-coverage {
+            color: #777 !important;
+            text-align: right;
+            border-left: 1px solid #666;
+            border-right: 1px solid #666;
+        }
+
+        table.coverage td.text {
+        }
+
+        table.coverage td span.cline-any {
+            display: inline-block;
+            padding: 0 5px;
+            width: 40px;
+        }
+        table.coverage td span.cline-neutral {
+            background: #eee;
+        }
+        table.coverage td span.cline-yes {
+            background: #b5d592;
+            color: #999;
+        }
+        table.coverage td span.cline-no {
+            background: #fc8c84;
+        }
+
+        .cstat-yes { color: #111; }
+        .cstat-no { background: #fc8c84; color: #111; }
+        .fstat-no { background: #ffc520; color: #111 !important; }
+        .cbranch-no { background:  yellow !important; color: #111; }
+
+        .cstat-skip { background: #ddd; color: #111; }
+        .fstat-skip { background: #ddd; color: #111 !important; }
+        .cbranch-skip { background: #ddd !important; color: #111; }
+
+        .missing-if-branch {
+            display: inline-block;
+            margin-right: 10px;
+            position: relative;
+            padding: 0 4px;
+            background: black;
+            color: yellow;
+        }
+
+        .skip-if-branch {
+            display: none;
+            margin-right: 10px;
+            position: relative;
+            padding: 0 4px;
+            background: #ccc;
+            color: white;
+        }
+
+        .missing-if-branch .typ, .skip-if-branch .typ {
+            color: inherit !important;
+        }
+
+        .entity, .metric { font-weight: bold; }
+        .metric { display: inline-block; border: 1px solid #333; padding: 0.3em; background: white; }
+        .metric small { font-size: 80%; font-weight: normal; color: #666; }
+
+        div.coverage-summary table { border-collapse: collapse; margin: 3em; font-size: 110%; }
+        div.coverage-summary td, div.coverage-summary table  th { margin: 0; padding: 0.25em 1em; border-top: 1px solid #666; border-bottom: 1px solid #666; }
+        div.coverage-summary th { text-align: left; border: 1px solid #666; background: #eee; font-weight: normal; }
+        div.coverage-summary th.file { border-right: none !important; }
+        div.coverage-summary th.pic { border-left: none !important; text-align: right; }
+        div.coverage-summary th.pct { border-right: none !important; }
+        div.coverage-summary th.abs { border-left: none !important; text-align: right; }
+        div.coverage-summary td.pct { text-align: right; border-left: 1px solid #666; }
+        div.coverage-summary td.abs { text-align: right; font-size: 90%; color: #444; border-right: 1px solid #666; }
+        div.coverage-summary td.file { text-align: right; border-left: 1px solid #666; white-space: nowrap;  }
+        div.coverage-summary td.pic { min-width: 120px !important;  }
+        div.coverage-summary a:link { color: #000; }
+        div.coverage-summary a:visited { color: #333; }
+        div.coverage-summary tfoot td { border-top: 1px solid #666; }
+
+        div.coverage-summary .yui3-datatable-sort-indicator, div.coverage-summary .dummy-sort-indicator {
+            height: 10px;
+            width: 7px;
+            display: inline-block;
+            margin-left: 0.5em;
+        }
+        div.coverage-summary .yui3-datatable-sort-indicator {
+            background: no-repeat scroll 0 0 transparent;
+        }
+        div.coverage-summary .yui3-datatable-sorted .yui3-datatable-sort-indicator {
+            background-position: 0 -20px;
+        }
+        div.coverage-summary .yui3-datatable-sorted-desc .yui3-datatable-sort-indicator {
+            background-position: 0 -10px;
+        }
+
+        .high { background: #b5d592 !important; }
+        .medium { background: #ffe87c !important; }
+        .low { background: #fc8c84 !important; }
+
+        span.cover-fill, span.cover-empty {
+            display:inline-block;
+            border:1px solid #444;
+            background: white;
+            height: 12px;
+        }
+        span.cover-fill {
+            background: #ccc;
+            border-right: 1px solid #444;
+        }
+        span.cover-empty {
+            background: white;
+            border-left: none;
+        }
+        span.cover-full {
+            border-right: none !important;
+        }
+        pre.prettyprint {
+            border: none !important;
+            padding: 0 !important;
+            margin: 0 !important;
+        }
+        .com { color: #999 !important; }
+        .ignore-none { color: #999; font-weight: normal; }
+
+    </style>
+</head>
+<body>
+<div class="header low">
+    <h1 style="font-weight: bold;">
+        <a href="https://github.com/npmtest/node-npmtest-resemblejs">npmtest-resemblejs (v0.0.1)</a>
+    </h1>
+    <h1>Code coverage report for <span class="entity">node-npmtest-resemblejs/node_modules/resemblejs/resemble.js</span></h1>
+    <h2>
+        
+        Statements: <span class="metric">9.47% <small>(39 / 412)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Branches: <span class="metric">3.61% <small>(6 / 166)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Functions: <span class="metric">3.92% <small>(2 / 51)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Lines: <span class="metric">9.7% <small>(39 / 402)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        Ignored: <span class="metric"><span class="ignore-none">none</span></span> &nbsp;&nbsp;&nbsp;&nbsp;
+    </h2>
+    <div class="path"><a href="../../../index.html">All files</a> &#187; <a href="index.html">node-npmtest-resemblejs/node_modules/resemblejs/</a> &#187; resemble.js</div>
+</div>
+<div class="body">
+<pre><table class="coverage">
+<tr><td class="line-count">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205
+206
+207
+208
+209
+210
+211
+212
+213
+214
+215
+216
+217
+218
+219
+220
+221
+222
+223
+224
+225
+226
+227
+228
+229
+230
+231
+232
+233
+234
+235
+236
+237
+238
+239
+240
+241
+242
+243
+244
+245
+246
+247
+248
+249
+250
+251
+252
+253
+254
+255
+256
+257
+258
+259
+260
+261
+262
+263
+264
+265
+266
+267
+268
+269
+270
+271
+272
+273
+274
+275
+276
+277
+278
+279
+280
+281
+282
+283
+284
+285
+286
+287
+288
+289
+290
+291
+292
+293
+294
+295
+296
+297
+298
+299
+300
+301
+302
+303
+304
+305
+306
+307
+308
+309
+310
+311
+312
+313
+314
+315
+316
+317
+318
+319
+320
+321
+322
+323
+324
+325
+326
+327
+328
+329
+330
+331
+332
+333
+334
+335
+336
+337
+338
+339
+340
+341
+342
+343
+344
+345
+346
+347
+348
+349
+350
+351
+352
+353
+354
+355
+356
+357
+358
+359
+360
+361
+362
+363
+364
+365
+366
+367
+368
+369
+370
+371
+372
+373
+374
+375
+376
+377
+378
+379
+380
+381
+382
+383
+384
+385
+386
+387
+388
+389
+390
+391
+392
+393
+394
+395
+396
+397
+398
+399
+400
+401
+402
+403
+404
+405
+406
+407
+408
+409
+410
+411
+412
+413
+414
+415
+416
+417
+418
+419
+420
+421
+422
+423
+424
+425
+426
+427
+428
+429
+430
+431
+432
+433
+434
+435
+436
+437
+438
+439
+440
+441
+442
+443
+444
+445
+446
+447
+448
+449
+450
+451
+452
+453
+454
+455
+456
+457
+458
+459
+460
+461
+462
+463
+464
+465
+466
+467
+468
+469
+470
+471
+472
+473
+474
+475
+476
+477
+478
+479
+480
+481
+482
+483
+484
+485
+486
+487
+488
+489
+490
+491
+492
+493
+494
+495
+496
+497
+498
+499
+500
+501
+502
+503
+504
+505
+506
+507
+508
+509
+510
+511
+512
+513
+514
+515
+516
+517
+518
+519
+520
+521
+522
+523
+524
+525
+526
+527
+528
+529
+530
+531
+532
+533
+534
+535
+536
+537
+538
+539
+540
+541
+542
+543
+544
+545
+546
+547
+548
+549
+550
+551
+552
+553
+554
+555
+556
+557
+558
+559
+560
+561
+562
+563
+564
+565
+566
+567
+568
+569
+570
+571
+572
+573
+574
+575
+576
+577
+578
+579
+580
+581
+582
+583
+584
+585
+586
+587
+588
+589
+590
+591
+592
+593
+594
+595
+596
+597
+598
+599
+600
+601
+602
+603
+604
+605
+606
+607
+608
+609
+610
+611
+612
+613
+614
+615
+616
+617
+618
+619
+620
+621
+622
+623
+624
+625
+626
+627
+628
+629
+630
+631
+632
+633
+634
+635
+636
+637
+638
+639
+640
+641
+642
+643
+644
+645
+646
+647
+648
+649
+650
+651
+652
+653
+654
+655
+656
+657
+658
+659
+660
+661
+662
+663
+664
+665
+666
+667
+668
+669
+670
+671
+672
+673
+674
+675
+676
+677
+678
+679
+680
+681
+682
+683
+684
+685
+686
+687
+688
+689
+690
+691
+692
+693
+694
+695
+696
+697
+698
+699
+700
+701
+702
+703
+704
+705
+706
+707
+708
+709</td><td class="line-coverage"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/*
+James Cryer / Huddle 2015
+URL: https://github.com/Huddle/Resemble.js
+*/
+&nbsp;
+(function (root, factory) {
+	<span class="missing-if-branch" title="if path not taken" >I</span>if (typeof define === 'function' &amp;&amp; <span class="branch-1 cbranch-no" title="branch not covered" >define.amd)</span> {
+<span class="cstat-no" title="statement not covered" >		define([], factory);</span>
+	} else <span class="missing-if-branch" title="else path not taken" >E</span>if (typeof module === 'object' &amp;&amp; module.exports) {
+		module.exports = factory();
+	} else {
+<span class="cstat-no" title="statement not covered" >		root.resemble = factory();</span>
+	}
+}(this, function () {
+	'use strict';
+&nbsp;
+	var pixelTransparency = 1;
+&nbsp;
+	var errorPixelColor = { // Color for Error Pixels. Between 0 and 255.
+		red: 255,
+		green: 0,
+		blue: 255,
+		alpha: 255
+	};
+&nbsp;
+	var targetPix = {r: 0, g: 0, b: 0, a: 0}; // isAntialiased
+&nbsp;
+<span class="fstat-no" title="function not covered" >	function colorsDistance(c1, c2){</span>
+<span class="cstat-no" title="statement not covered" >		return (Math.abs(c1.r - c2.r) + Math.abs(c1.g - c2.g) + Math.abs(c1.b - c2.b))/3;</span>
+	}
+&nbsp;
+	var errorPixelTransform = {
+		flat: <span class="fstat-no" title="function not covered" >function (px, offset, d1, d2) {</span>
+<span class="cstat-no" title="statement not covered" >			px[offset] = errorPixelColor.red;</span>
+<span class="cstat-no" title="statement not covered" >			px[offset + 1] = errorPixelColor.green;</span>
+<span class="cstat-no" title="statement not covered" >			px[offset + 2] = errorPixelColor.blue;</span>
+<span class="cstat-no" title="statement not covered" >			px[offset + 3] = errorPixelColor.alpha;</span>
+		},
+		movement: <span class="fstat-no" title="function not covered" >function (px, offset, d1, d2) {</span>
+<span class="cstat-no" title="statement not covered" >			px[offset] = ((d2.r * (errorPixelColor.red / 255)) + errorPixelColor.red) / 2;</span>
+<span class="cstat-no" title="statement not covered" >			px[offset + 1] = ((d2.g * (errorPixelColor.green / 255)) + errorPixelColor.green) / 2;</span>
+<span class="cstat-no" title="statement not covered" >			px[offset + 2] = ((d2.b * (errorPixelColor.blue / 255)) + errorPixelColor.blue) / 2;</span>
+<span class="cstat-no" title="statement not covered" >			px[offset + 3] = d2.a;</span>
+		},
+		flatDifferenceIntensity: <span class="fstat-no" title="function not covered" >function (px, offset, d1, d2) {</span>
+<span class="cstat-no" title="statement not covered" >			px[offset] = errorPixelColor.red;</span>
+<span class="cstat-no" title="statement not covered" >			px[offset + 1] = errorPixelColor.green;</span>
+<span class="cstat-no" title="statement not covered" >			px[offset + 2] = errorPixelColor.blue;</span>
+<span class="cstat-no" title="statement not covered" >			px[offset + 3] = colorsDistance(d1, d2);</span>
+		},
+		movementDifferenceIntensity: <span class="fstat-no" title="function not covered" >function (px, offset, d1, d2) {</span>
+<span class="cstat-no" title="statement not covered" >			var ratio = colorsDistance(d1, d2) / 255 * 0.8;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >			px[offset] = ((1 - ratio) * (d2.r * (errorPixelColor.red / 255)) + ratio * errorPixelColor.red);</span>
+<span class="cstat-no" title="statement not covered" >			px[offset + 1] = ((1 - ratio) * (d2.g * (errorPixelColor.green / 255)) + ratio * errorPixelColor.green);</span>
+<span class="cstat-no" title="statement not covered" >			px[offset + 2] = ((1 - ratio) * (d2.b * (errorPixelColor.blue / 255)) + ratio * errorPixelColor.blue);</span>
+<span class="cstat-no" title="statement not covered" >			px[offset + 3] = d2.a;</span>
+		}
+	};
+&nbsp;
+	var errorPixel = errorPixelTransform.flat;
+	var largeImageThreshold = 1200;
+	var useCrossOrigin = true;
+	var document = typeof window != "undefined" ? <span class="branch-0 cbranch-no" title="branch not covered" >window.document </span>: {};
+&nbsp;
+	var resemble = <span class="fstat-no" title="function not covered" >function( fileData ){</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >		var data = {};</span>
+<span class="cstat-no" title="statement not covered" >		var images = [];</span>
+<span class="cstat-no" title="statement not covered" >		var updateCallbackArray = [];</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >		var tolerance = { // between 0 and 255</span>
+			red: 16,
+			green: 16,
+			blue: 16,
+			alpha: 16,
+			minBrightness: 16,
+			maxBrightness: 240
+		};
+&nbsp;
+<span class="cstat-no" title="statement not covered" >		var ignoreAntialiasing = false;</span>
+<span class="cstat-no" title="statement not covered" >		var ignoreColors = false;</span>
+<span class="cstat-no" title="statement not covered" >		var scaleToSameSize = false;</span>
+&nbsp;
+<span class="fstat-no" title="function not covered" >		function triggerDataUpdate(){</span>
+<span class="cstat-no" title="statement not covered" >			var len = updateCallbackArray.length;</span>
+<span class="cstat-no" title="statement not covered" >			var i;</span>
+<span class="cstat-no" title="statement not covered" >			for(i=0;i&lt;len;i++){</span>
+<span class="cstat-no" title="statement not covered" >				if (typeof updateCallbackArray[i] === 'function'){</span>
+<span class="cstat-no" title="statement not covered" >					updateCallbackArray[i](data);</span>
+				}
+			}
+		}
+&nbsp;
+<span class="fstat-no" title="function not covered" >		function loop(w, h, callback){</span>
+<span class="cstat-no" title="statement not covered" >			var x,y;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >			for (x=0;x&lt;w;x++){</span>
+<span class="cstat-no" title="statement not covered" >				for (y=0;y&lt;h;y++){</span>
+<span class="cstat-no" title="statement not covered" >					callback(x, y);</span>
+				}
+			}
+		}
+&nbsp;
+<span class="fstat-no" title="function not covered" >		function parseImage(sourceImageData, width, height){</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >			var pixelCount = 0;</span>
+<span class="cstat-no" title="statement not covered" >			var redTotal = 0;</span>
+<span class="cstat-no" title="statement not covered" >			var greenTotal = 0;</span>
+<span class="cstat-no" title="statement not covered" >			var blueTotal = 0;</span>
+<span class="cstat-no" title="statement not covered" >			var alphaTotal = 0;</span>
+<span class="cstat-no" title="statement not covered" >			var brightnessTotal = 0;</span>
+<span class="cstat-no" title="statement not covered" >			var whiteTotal = 0;</span>
+<span class="cstat-no" title="statement not covered" >			var blackTotal = 0;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >			loop(width, height, <span class="fstat-no" title="function not covered" >function(horizontalPos, verticalPos){</span></span>
+<span class="cstat-no" title="statement not covered" >				var offset = (verticalPos*width + horizontalPos) * 4;</span>
+<span class="cstat-no" title="statement not covered" >				var red = sourceImageData[offset];</span>
+<span class="cstat-no" title="statement not covered" >				var green = sourceImageData[offset + 1];</span>
+<span class="cstat-no" title="statement not covered" >				var blue = sourceImageData[offset + 2];</span>
+<span class="cstat-no" title="statement not covered" >				var alpha = sourceImageData[offset + 3];</span>
+<span class="cstat-no" title="statement not covered" >				var brightness = getBrightness(red,green,blue);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >				if (red == green &amp;&amp; red == blue &amp;&amp; alpha) {</span>
+<span class="cstat-no" title="statement not covered" >					if (red == 0) {</span>
+<span class="cstat-no" title="statement not covered" >						blackTotal++</span>
+					} else <span class="cstat-no" title="statement not covered" >if (red == 255) {</span>
+<span class="cstat-no" title="statement not covered" >						whiteTotal++</span>
+					}
+				}
+&nbsp;
+<span class="cstat-no" title="statement not covered" >				pixelCount++;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >				redTotal += red / 255 * 100;</span>
+<span class="cstat-no" title="statement not covered" >				greenTotal += green / 255 * 100;</span>
+<span class="cstat-no" title="statement not covered" >				blueTotal += blue / 255 * 100;</span>
+<span class="cstat-no" title="statement not covered" >				alphaTotal += (255 - alpha) / 255 * 100;</span>
+<span class="cstat-no" title="statement not covered" >				brightnessTotal += brightness / 255 * 100;</span>
+			});
+&nbsp;
+<span class="cstat-no" title="statement not covered" >			data.red = Math.floor(redTotal / pixelCount);</span>
+<span class="cstat-no" title="statement not covered" >			data.green = Math.floor(greenTotal / pixelCount);</span>
+<span class="cstat-no" title="statement not covered" >			data.blue = Math.floor(blueTotal / pixelCount);</span>
+<span class="cstat-no" title="statement not covered" >			data.alpha = Math.floor(alphaTotal / pixelCount);</span>
+<span class="cstat-no" title="statement not covered" >			data.brightness = Math.floor(brightnessTotal / pixelCount);</span>
+<span class="cstat-no" title="statement not covered" >			data.white = Math.floor(whiteTotal / pixelCount * 100);</span>
+<span class="cstat-no" title="statement not covered" >			data.black = Math.floor(blackTotal / pixelCount * 100);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >			triggerDataUpdate();</span>
+		}
+&nbsp;
+<span class="fstat-no" title="function not covered" >		function loadImageData( fileData, callback ){</span>
+<span class="cstat-no" title="statement not covered" >			var fileReader;</span>
+<span class="cstat-no" title="statement not covered" >			var hiddenImage = new Image();</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >			if(useCrossOrigin) {</span>
+<span class="cstat-no" title="statement not covered" >				hiddenImage.setAttribute('crossorigin', 'anonymous');</span>
+			}
+&nbsp;
+<span class="cstat-no" title="statement not covered" >			hiddenImage.onerror = <span class="fstat-no" title="function not covered" >function () { </span></span>
+<span class="cstat-no" title="statement not covered" >				hiddenImage.onerror = null; </span>//fixes pollution between calls
+<span class="cstat-no" title="statement not covered" >				images.push({ error : "Image load error."});</span>
+<span class="cstat-no" title="statement not covered" >				callback(); </span>
+			};
+&nbsp;
+<span class="cstat-no" title="statement not covered" >			hiddenImage.onload = <span class="fstat-no" title="function not covered" >function() {</span></span>
+<span class="cstat-no" title="statement not covered" >				hiddenImage.onload = null; </span>//fixes pollution between calls
+&nbsp;
+<span class="cstat-no" title="statement not covered" >				var hiddenCanvas =  document.createElement('canvas');</span>
+<span class="cstat-no" title="statement not covered" >				var imageData;</span>
+&nbsp;
+				// don't assign to hiddenImage, see https://github.com/Huddle/Resemble.js/pull/87/commits/300d43352a2845aad289b254bfbdc7cd6a37e2d7
+<span class="cstat-no" title="statement not covered" >				var width = hiddenImage.width;</span>
+<span class="cstat-no" title="statement not covered" >				var height = hiddenImage.height;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >				if( scaleToSameSize &amp;&amp; images.length == 1 ){</span>
+<span class="cstat-no" title="statement not covered" >					width   = images[0].width;</span>
+<span class="cstat-no" title="statement not covered" >					height  = images[0].height;</span>
+				}
+&nbsp;
+<span class="cstat-no" title="statement not covered" >				hiddenCanvas.width = width;</span>
+<span class="cstat-no" title="statement not covered" >				hiddenCanvas.height = height;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >				hiddenCanvas.getContext('2d').drawImage(hiddenImage, 0, 0, width, height);</span>
+<span class="cstat-no" title="statement not covered" >				imageData = hiddenCanvas.getContext('2d').getImageData(0, 0, width, height);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >				images.push(imageData);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >				callback(imageData, width, height);</span>
+			};
+&nbsp;
+<span class="cstat-no" title="statement not covered" >			if (typeof fileData === 'string') {</span>
+<span class="cstat-no" title="statement not covered" >				hiddenImage.src = fileData;</span>
+<span class="cstat-no" title="statement not covered" >				if (hiddenImage.complete &amp;&amp; hiddenImage.naturalWidth &gt; 0) {</span>
+<span class="cstat-no" title="statement not covered" >					hiddenImage.onload();</span>
+				}
+			} else <span class="cstat-no" title="statement not covered" >if (typeof fileData.data !== 'undefined'</span>
+					&amp;&amp; typeof fileData.width === 'number'
+					&amp;&amp; typeof fileData.height === 'number') {
+&nbsp;
+<span class="cstat-no" title="statement not covered" >				images.push(fileData);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >				callback(fileData, fileData.width, fileData.height);</span>
+&nbsp;
+			} else {
+<span class="cstat-no" title="statement not covered" >				fileReader = new FileReader();</span>
+<span class="cstat-no" title="statement not covered" >				fileReader.onload = <span class="fstat-no" title="function not covered" >function (event) {</span></span>
+<span class="cstat-no" title="statement not covered" >					hiddenImage.src = event.target.result;</span>
+				};
+<span class="cstat-no" title="statement not covered" >				fileReader.readAsDataURL(fileData);</span>
+			}
+		}
+&nbsp;
+<span class="fstat-no" title="function not covered" >		function isColorSimilar(a, b, color){</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >			var absDiff = Math.abs(a - b);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >			if(typeof a === 'undefined'){</span>
+<span class="cstat-no" title="statement not covered" >				return false;</span>
+			}
+<span class="cstat-no" title="statement not covered" >			if(typeof b === 'undefined'){</span>
+<span class="cstat-no" title="statement not covered" >				return false;</span>
+			}
+&nbsp;
+<span class="cstat-no" title="statement not covered" >			if(a === b){</span>
+<span class="cstat-no" title="statement not covered" >				return true;</span>
+			} else <span class="cstat-no" title="statement not covered" >if ( absDiff &lt; tolerance[color] ) {</span>
+<span class="cstat-no" title="statement not covered" >				return true;</span>
+			} else {
+<span class="cstat-no" title="statement not covered" >				return false;</span>
+			}
+		}
+&nbsp;
+<span class="fstat-no" title="function not covered" >		function isPixelBrightnessSimilar(d1, d2){</span>
+<span class="cstat-no" title="statement not covered" >			var alpha = isColorSimilar(d1.a, d2.a, 'alpha');</span>
+<span class="cstat-no" title="statement not covered" >			var brightness = isColorSimilar(d1.brightness, d2.brightness, 'minBrightness');</span>
+<span class="cstat-no" title="statement not covered" >			return brightness &amp;&amp; alpha;</span>
+		}
+&nbsp;
+<span class="fstat-no" title="function not covered" >		function getBrightness(r,g,b){</span>
+<span class="cstat-no" title="statement not covered" >			return 0.3*r + 0.59*g + 0.11*b;</span>
+		}
+&nbsp;
+<span class="fstat-no" title="function not covered" >		function isRGBSame(d1,d2){</span>
+<span class="cstat-no" title="statement not covered" >			var red = d1.r === d2.r;</span>
+<span class="cstat-no" title="statement not covered" >			var green = d1.g === d2.g;</span>
+<span class="cstat-no" title="statement not covered" >			var blue = d1.b === d2.b;</span>
+<span class="cstat-no" title="statement not covered" >			return red &amp;&amp; green &amp;&amp; blue;</span>
+		}
+&nbsp;
+<span class="fstat-no" title="function not covered" >		function isRGBSimilar(d1, d2){</span>
+<span class="cstat-no" title="statement not covered" >			var red = isColorSimilar(d1.r,d2.r,'red');</span>
+<span class="cstat-no" title="statement not covered" >			var green = isColorSimilar(d1.g,d2.g,'green');</span>
+<span class="cstat-no" title="statement not covered" >			var blue = isColorSimilar(d1.b,d2.b,'blue');</span>
+<span class="cstat-no" title="statement not covered" >			var alpha = isColorSimilar(d1.a, d2.a, 'alpha');</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >			return red &amp;&amp; green &amp;&amp; blue &amp;&amp; alpha;</span>
+		}
+&nbsp;
+<span class="fstat-no" title="function not covered" >		function isContrasting(d1, d2){</span>
+<span class="cstat-no" title="statement not covered" >			return Math.abs(d1.brightness - d2.brightness) &gt; tolerance.maxBrightness;</span>
+		}
+&nbsp;
+<span class="fstat-no" title="function not covered" >		function getHue(r,g,b){</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >			r = r / 255;</span>
+<span class="cstat-no" title="statement not covered" >			g = g / 255;</span>
+<span class="cstat-no" title="statement not covered" >			b = b / 255;</span>
+<span class="cstat-no" title="statement not covered" >			var max = Math.max(r, g, b), min = Math.min(r, g, b);</span>
+<span class="cstat-no" title="statement not covered" >			var h;</span>
+<span class="cstat-no" title="statement not covered" >			var d;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >			if (max == min){</span>
+<span class="cstat-no" title="statement not covered" >				h = 0; </span>// achromatic
+			} else{
+<span class="cstat-no" title="statement not covered" >				d = max - min;</span>
+<span class="cstat-no" title="statement not covered" >				switch(max){</span>
+					case r: <span class="cstat-no" title="statement not covered" >h = (g - b) / d + (g &lt; b ? 6 : 0); <span class="cstat-no" title="statement not covered" ></span>break;</span>
+					case g: <span class="cstat-no" title="statement not covered" >h = (b - r) / d + 2; <span class="cstat-no" title="statement not covered" ></span>break;</span>
+					case b: <span class="cstat-no" title="statement not covered" >h = (r - g) / d + 4; <span class="cstat-no" title="statement not covered" ></span>break;</span>
+				}
+<span class="cstat-no" title="statement not covered" >				h /= 6;</span>
+			}
+&nbsp;
+<span class="cstat-no" title="statement not covered" >			return h;</span>
+		}
+&nbsp;
+<span class="fstat-no" title="function not covered" >		function isAntialiased(sourcePix, data, cacheSet, verticalPos, horizontalPos, width){</span>
+<span class="cstat-no" title="statement not covered" >			var offset;</span>
+<span class="cstat-no" title="statement not covered" >			var distance = 1;</span>
+<span class="cstat-no" title="statement not covered" >			var i;</span>
+<span class="cstat-no" title="statement not covered" >			var j;</span>
+<span class="cstat-no" title="statement not covered" >			var hasHighContrastSibling = 0;</span>
+<span class="cstat-no" title="statement not covered" >			var hasSiblingWithDifferentHue = 0;</span>
+<span class="cstat-no" title="statement not covered" >			var hasEquivalentSibling = 0;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >			addHueInfo(sourcePix);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >			for (i = distance*-1; i &lt;= distance; i++){</span>
+<span class="cstat-no" title="statement not covered" >				for (j = distance*-1; j &lt;= distance; j++){</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >					if(i===0 &amp;&amp; j===0){</span>
+						// ignore source pixel
+					} else {
+&nbsp;
+<span class="cstat-no" title="statement not covered" >						offset = ((verticalPos+j)*width + (horizontalPos+i)) * 4;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >						if(!getPixelInfo(targetPix , data, offset, cacheSet)){</span>
+<span class="cstat-no" title="statement not covered" >							continue;</span>
+						}
+&nbsp;
+<span class="cstat-no" title="statement not covered" >						addBrightnessInfo(targetPix);</span>
+<span class="cstat-no" title="statement not covered" >						addHueInfo(targetPix);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >						if( isContrasting(sourcePix, targetPix) ){</span>
+<span class="cstat-no" title="statement not covered" >							hasHighContrastSibling++;</span>
+						}
+&nbsp;
+<span class="cstat-no" title="statement not covered" >						if( isRGBSame(sourcePix,targetPix) ){</span>
+<span class="cstat-no" title="statement not covered" >							hasEquivalentSibling++;</span>
+						}
+&nbsp;
+<span class="cstat-no" title="statement not covered" >						if( Math.abs(targetPix.h - sourcePix.h) &gt; 0.3 ){</span>
+<span class="cstat-no" title="statement not covered" >							hasSiblingWithDifferentHue++;</span>
+						}
+&nbsp;
+<span class="cstat-no" title="statement not covered" >						if( hasSiblingWithDifferentHue &gt; 1 || hasHighContrastSibling &gt; 1){</span>
+<span class="cstat-no" title="statement not covered" >							return true;</span>
+						}
+					}
+				}
+			}
+&nbsp;
+<span class="cstat-no" title="statement not covered" >			if(hasEquivalentSibling &lt; 2){</span>
+<span class="cstat-no" title="statement not covered" >				return true;</span>
+			}
+&nbsp;
+<span class="cstat-no" title="statement not covered" >			return false;</span>
+		}
+&nbsp;
+<span class="fstat-no" title="function not covered" >		function copyPixel(px, offset, data){</span>
+<span class="cstat-no" title="statement not covered" >			px[offset] = data.r; </span>//r
+<span class="cstat-no" title="statement not covered" >			px[offset + 1] = data.g; </span>//g
+<span class="cstat-no" title="statement not covered" >			px[offset + 2] = data.b; </span>//b
+<span class="cstat-no" title="statement not covered" >			px[offset + 3] = data.a * pixelTransparency; </span>//a
+		}
+&nbsp;
+<span class="fstat-no" title="function not covered" >		function copyGrayScalePixel(px, offset, data){</span>
+<span class="cstat-no" title="statement not covered" >			px[offset] = data.brightness; </span>//r
+<span class="cstat-no" title="statement not covered" >			px[offset + 1] = data.brightness; </span>//g
+<span class="cstat-no" title="statement not covered" >			px[offset + 2] = data.brightness; </span>//b
+<span class="cstat-no" title="statement not covered" >			px[offset + 3] = data.a * pixelTransparency; </span>//a
+		}
+&nbsp;
+<span class="fstat-no" title="function not covered" >		function getPixelInfo(dst, data, offset, cacheSet) {</span>
+<span class="cstat-no" title="statement not covered" >			if (data.length &gt; offset) {</span>
+<span class="cstat-no" title="statement not covered" >				dst.r = data[offset];</span>
+<span class="cstat-no" title="statement not covered" >				dst.g = data[offset + 1];</span>
+<span class="cstat-no" title="statement not covered" >				dst.b = data[offset + 2];</span>
+<span class="cstat-no" title="statement not covered" >				dst.a = data[offset + 3];</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >				return true;</span>
+			}
+&nbsp;
+<span class="cstat-no" title="statement not covered" >			return false;</span>
+		}
+&nbsp;
+<span class="fstat-no" title="function not covered" >		function addBrightnessInfo(data){</span>
+<span class="cstat-no" title="statement not covered" >			data.brightness = getBrightness(data.r,data.g,data.b); </span>// 'corrected' lightness
+		}
+&nbsp;
+<span class="fstat-no" title="function not covered" >		function addHueInfo(data){</span>
+<span class="cstat-no" title="statement not covered" >			data.h = getHue(data.r,data.g,data.b);</span>
+		}
+&nbsp;
+<span class="fstat-no" title="function not covered" >		function analyseImages(img1, img2, width, height){</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >			var hiddenCanvas = document.createElement('canvas');</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >			var data1 = img1.data;</span>
+<span class="cstat-no" title="statement not covered" >			var data2 = img2.data;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >			hiddenCanvas.width = width;</span>
+<span class="cstat-no" title="statement not covered" >			hiddenCanvas.height = height;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >			var context = hiddenCanvas.getContext('2d');</span>
+<span class="cstat-no" title="statement not covered" >			var imgd = context.createImageData(width,height);</span>
+<span class="cstat-no" title="statement not covered" >			var targetPix = imgd.data;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >			var mismatchCount = 0;</span>
+<span class="cstat-no" title="statement not covered" >			var diffBounds = {</span>
+				top: height,
+				left: width,
+				bottom: 0,
+				right: 0
+			};
+<span class="cstat-no" title="statement not covered" >			var updateBounds = <span class="fstat-no" title="function not covered" >function(x, y) {</span></span>
+<span class="cstat-no" title="statement not covered" >				diffBounds.left = Math.min(x, diffBounds.left);</span>
+<span class="cstat-no" title="statement not covered" >				diffBounds.right = Math.max(x, diffBounds.right);</span>
+<span class="cstat-no" title="statement not covered" >				diffBounds.top = Math.min(y, diffBounds.top);</span>
+<span class="cstat-no" title="statement not covered" >				diffBounds.bottom = Math.max(y, diffBounds.bottom);</span>
+			};
+&nbsp;
+<span class="cstat-no" title="statement not covered" >			var time = Date.now();</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >			var skip;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >			if(!!largeImageThreshold &amp;&amp; ignoreAntialiasing &amp;&amp; (width &gt; largeImageThreshold || height &gt; largeImageThreshold)){</span>
+<span class="cstat-no" title="statement not covered" >				skip = 6;</span>
+			}
+&nbsp;
+<span class="cstat-no" title="statement not covered" >			var pixel1 = {r: 0, g: 0, b: 0, a: 0};</span>
+<span class="cstat-no" title="statement not covered" >			var pixel2 = { r: 0, g: 0, b: 0, a: 0 };</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >			loop(width, height, <span class="fstat-no" title="function not covered" >function(horizontalPos, verticalPos){</span></span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >				if(skip){ // only skip if the image isn't small</span>
+<span class="cstat-no" title="statement not covered" >					if(verticalPos % skip === 0 || horizontalPos % skip === 0){</span>
+<span class="cstat-no" title="statement not covered" >						return;</span>
+					}
+				}
+&nbsp;
+<span class="cstat-no" title="statement not covered" >				var offset = (verticalPos*width + horizontalPos) * 4;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >				if (!getPixelInfo(pixel1, data1, offset, 1) || !getPixelInfo(pixel2, data2, offset, 2)) {</span>
+<span class="cstat-no" title="statement not covered" >					return;</span>
+				}
+&nbsp;
+<span class="cstat-no" title="statement not covered" >				if (ignoreColors){</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >					addBrightnessInfo(pixel1);</span>
+<span class="cstat-no" title="statement not covered" >					addBrightnessInfo(pixel2);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >					if( isPixelBrightnessSimilar(pixel1, pixel2) ){</span>
+<span class="cstat-no" title="statement not covered" >						copyGrayScalePixel(targetPix, offset, pixel2);</span>
+					} else {
+<span class="cstat-no" title="statement not covered" >						errorPixel(targetPix, offset, pixel1, pixel2);</span>
+<span class="cstat-no" title="statement not covered" >						mismatchCount++;</span>
+<span class="cstat-no" title="statement not covered" >						updateBounds(horizontalPos, verticalPos);</span>
+					}
+<span class="cstat-no" title="statement not covered" >					return;</span>
+				}
+&nbsp;
+<span class="cstat-no" title="statement not covered" >				if( isRGBSimilar(pixel1, pixel2) ){</span>
+<span class="cstat-no" title="statement not covered" >					copyPixel(targetPix, offset, pixel1, pixel2);</span>
+&nbsp;
+				} else <span class="cstat-no" title="statement not covered" >if( ignoreAntialiasing &amp;&amp; (</span>
+						addBrightnessInfo(pixel1), // jit pixel info augmentation looks a little weird, sorry.
+						addBrightnessInfo(pixel2),
+						isAntialiased(pixel1, data1, 1, verticalPos, horizontalPos, width) ||
+						isAntialiased(pixel2, data2, 2, verticalPos, horizontalPos, width)
+					)){
+&nbsp;
+<span class="cstat-no" title="statement not covered" >					if( isPixelBrightnessSimilar(pixel1, pixel2) ){</span>
+<span class="cstat-no" title="statement not covered" >						copyGrayScalePixel(targetPix, offset, pixel2);</span>
+					} else {
+<span class="cstat-no" title="statement not covered" >						errorPixel(targetPix, offset, pixel1, pixel2);</span>
+<span class="cstat-no" title="statement not covered" >						mismatchCount++;</span>
+<span class="cstat-no" title="statement not covered" >						updateBounds(horizontalPos, verticalPos);</span>
+					}
+				} else {
+<span class="cstat-no" title="statement not covered" >					errorPixel(targetPix, offset, pixel1, pixel2);</span>
+<span class="cstat-no" title="statement not covered" >					mismatchCount++;</span>
+<span class="cstat-no" title="statement not covered" >					updateBounds(horizontalPos, verticalPos);</span>
+				}
+&nbsp;
+			});
+&nbsp;
+<span class="cstat-no" title="statement not covered" >			data.rawMisMatchPercentage = (mismatchCount / (height*width) * 100);</span>
+<span class="cstat-no" title="statement not covered" >			data.misMatchPercentage = data.rawMisMatchPercentage.toFixed(2);</span>
+<span class="cstat-no" title="statement not covered" >			data.diffBounds = diffBounds;</span>
+<span class="cstat-no" title="statement not covered" >			data.analysisTime = Date.now() - time;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >			data.getImageDataUrl = <span class="fstat-no" title="function not covered" >function(text){</span></span>
+<span class="cstat-no" title="statement not covered" >				var barHeight = 0;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >				if(text){</span>
+<span class="cstat-no" title="statement not covered" >					barHeight = addLabel(text,context,hiddenCanvas);</span>
+				}
+&nbsp;
+<span class="cstat-no" title="statement not covered" >				context.putImageData(imgd, 0, barHeight);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >				return hiddenCanvas.toDataURL("image/png");</span>
+			};
+		}
+&nbsp;
+<span class="fstat-no" title="function not covered" >		function addLabel(text, context, hiddenCanvas){</span>
+<span class="cstat-no" title="statement not covered" >			var textPadding = 2;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >			context.font = '12px sans-serif';</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >			var textWidth = context.measureText(text).width + textPadding*2;</span>
+<span class="cstat-no" title="statement not covered" >			var barHeight = 22;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >			if(textWidth &gt; hiddenCanvas.width){</span>
+<span class="cstat-no" title="statement not covered" >				hiddenCanvas.width = textWidth;</span>
+			}
+&nbsp;
+<span class="cstat-no" title="statement not covered" >			hiddenCanvas.height += barHeight;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >			context.fillStyle = "#666";</span>
+<span class="cstat-no" title="statement not covered" >			context.fillRect(0,0,hiddenCanvas.width,barHeight -4);</span>
+<span class="cstat-no" title="statement not covered" >			context.fillStyle = "#fff";</span>
+<span class="cstat-no" title="statement not covered" >			context.fillRect(0,barHeight -4,hiddenCanvas.width, 4);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >			context.fillStyle = "#fff";</span>
+<span class="cstat-no" title="statement not covered" >			context.textBaseline = "top";</span>
+<span class="cstat-no" title="statement not covered" >			context.font = '12px sans-serif';</span>
+<span class="cstat-no" title="statement not covered" >			context.fillText(text, textPadding, 1);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >			return barHeight;</span>
+		}
+&nbsp;
+<span class="fstat-no" title="function not covered" >		function normalise(img, w, h){</span>
+<span class="cstat-no" title="statement not covered" >			var c;</span>
+<span class="cstat-no" title="statement not covered" >			var context;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >			if(img.height &lt; h || img.width &lt; w){</span>
+<span class="cstat-no" title="statement not covered" >				c = document.createElement('canvas');</span>
+<span class="cstat-no" title="statement not covered" >				c.width = w;</span>
+<span class="cstat-no" title="statement not covered" >				c.height = h;</span>
+<span class="cstat-no" title="statement not covered" >				context = c.getContext('2d');</span>
+<span class="cstat-no" title="statement not covered" >				context.putImageData(img, 0, 0);</span>
+<span class="cstat-no" title="statement not covered" >				return context.getImageData(0, 0, w, h);</span>
+			}
+&nbsp;
+<span class="cstat-no" title="statement not covered" >			return img;</span>
+		}
+&nbsp;
+<span class="fstat-no" title="function not covered" >		function compare(one, two){</span>
+&nbsp;
+<span class="fstat-no" title="function not covered" >			function onceWeHaveBoth(){</span>
+<span class="cstat-no" title="statement not covered" >				var width;</span>
+<span class="cstat-no" title="statement not covered" >				var height;</span>
+<span class="cstat-no" title="statement not covered" >				if(images.length === 2){</span>
+<span class="cstat-no" title="statement not covered" >					if( images[0].error || images[1].error ){</span>
+<span class="cstat-no" title="statement not covered" >						data = {};</span>
+<span class="cstat-no" title="statement not covered" >						data.error = images[0].error ?  images[0].error : images[1].error;</span>
+<span class="cstat-no" title="statement not covered" >						triggerDataUpdate();</span>
+<span class="cstat-no" title="statement not covered" >						return;</span>
+					}
+<span class="cstat-no" title="statement not covered" >					width = images[0].width &gt; images[1].width ? images[0].width : images[1].width;</span>
+<span class="cstat-no" title="statement not covered" >					height = images[0].height &gt; images[1].height ? images[0].height : images[1].height;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >					if( (images[0].width === images[1].width) &amp;&amp; (images[0].height === images[1].height) ){</span>
+<span class="cstat-no" title="statement not covered" >						data.isSameDimensions = true;</span>
+					} else {
+<span class="cstat-no" title="statement not covered" >						data.isSameDimensions = false;</span>
+					}
+&nbsp;
+<span class="cstat-no" title="statement not covered" >					data.dimensionDifference = { width: images[0].width - images[1].width, height: images[0].height - images[1].height };</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >					analyseImages( normalise(images[0],width, height), normalise(images[1],width, height), width, height);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >					triggerDataUpdate();</span>
+				}
+			}
+&nbsp;
+<span class="cstat-no" title="statement not covered" >			images = [];</span>
+<span class="cstat-no" title="statement not covered" >			loadImageData(one, onceWeHaveBoth);</span>
+<span class="cstat-no" title="statement not covered" >			loadImageData(two, onceWeHaveBoth);</span>
+		}
+&nbsp;
+<span class="fstat-no" title="function not covered" >		function getCompareApi(param){</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >			var secondFileData,</span>
+				hasMethod = typeof param === 'function';
+&nbsp;
+<span class="cstat-no" title="statement not covered" >			if( !hasMethod ){</span>
+				// assume it's file data
+<span class="cstat-no" title="statement not covered" >				secondFileData = param;</span>
+			}
+&nbsp;
+<span class="cstat-no" title="statement not covered" >			var self = {</span>
+				scaleToSameSize: <span class="fstat-no" title="function not covered" >function(){</span>
+<span class="cstat-no" title="statement not covered" >					scaleToSameSize = true;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >					if(hasMethod) { <span class="cstat-no" title="statement not covered" >param(); </span>}</span>
+<span class="cstat-no" title="statement not covered" >					return self;</span>
+				},
+				useOriginalSize: <span class="fstat-no" title="function not covered" >function(){</span>
+<span class="cstat-no" title="statement not covered" >					scaleToSameSize = false;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >					if(hasMethod) { <span class="cstat-no" title="statement not covered" >param(); </span>}</span>
+<span class="cstat-no" title="statement not covered" >					return self;</span>
+				},
+				ignoreNothing: <span class="fstat-no" title="function not covered" >function(){</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >					tolerance.red = 0;</span>
+<span class="cstat-no" title="statement not covered" >					tolerance.green = 0;</span>
+<span class="cstat-no" title="statement not covered" >					tolerance.blue = 0;</span>
+<span class="cstat-no" title="statement not covered" >					tolerance.alpha = 0;</span>
+<span class="cstat-no" title="statement not covered" >					tolerance.minBrightness = 0;</span>
+<span class="cstat-no" title="statement not covered" >					tolerance.maxBrightness = 255;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >					ignoreAntialiasing = false;</span>
+<span class="cstat-no" title="statement not covered" >					ignoreColors = false;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >					if(hasMethod) { <span class="cstat-no" title="statement not covered" >param(); </span>}</span>
+<span class="cstat-no" title="statement not covered" >					return self;</span>
+				},
+				ignoreLess: <span class="fstat-no" title="function not covered" >function(){</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >					tolerance.red = 16;</span>
+<span class="cstat-no" title="statement not covered" >					tolerance.green = 16;</span>
+<span class="cstat-no" title="statement not covered" >					tolerance.blue = 16;</span>
+<span class="cstat-no" title="statement not covered" >					tolerance.alpha = 16;</span>
+<span class="cstat-no" title="statement not covered" >					tolerance.minBrightness = 16;</span>
+<span class="cstat-no" title="statement not covered" >					tolerance.maxBrightness = 240;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >					ignoreAntialiasing = false;</span>
+<span class="cstat-no" title="statement not covered" >					ignoreColors = false;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >					if(hasMethod) { <span class="cstat-no" title="statement not covered" >param(); </span>}</span>
+<span class="cstat-no" title="statement not covered" >					return self;</span>
+				},
+				ignoreAntialiasing: <span class="fstat-no" title="function not covered" >function(){</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >					tolerance.red = 32;</span>
+<span class="cstat-no" title="statement not covered" >					tolerance.green = 32;</span>
+<span class="cstat-no" title="statement not covered" >					tolerance.blue = 32;</span>
+<span class="cstat-no" title="statement not covered" >					tolerance.alpha = 32;</span>
+<span class="cstat-no" title="statement not covered" >					tolerance.minBrightness = 64;</span>
+<span class="cstat-no" title="statement not covered" >					tolerance.maxBrightness = 96;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >					ignoreAntialiasing = true;</span>
+<span class="cstat-no" title="statement not covered" >					ignoreColors = false;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >					if(hasMethod) { <span class="cstat-no" title="statement not covered" >param(); </span>}</span>
+<span class="cstat-no" title="statement not covered" >					return self;</span>
+				},
+				ignoreColors: <span class="fstat-no" title="function not covered" >function(){</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >					tolerance.alpha = 16;</span>
+<span class="cstat-no" title="statement not covered" >					tolerance.minBrightness = 16;</span>
+<span class="cstat-no" title="statement not covered" >					tolerance.maxBrightness = 240;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >					ignoreAntialiasing = false;</span>
+<span class="cstat-no" title="statement not covered" >					ignoreColors = true;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >					if(hasMethod) { <span class="cstat-no" title="statement not covered" >param(); </span>}</span>
+<span class="cstat-no" title="statement not covered" >					return self;</span>
+				},
+				repaint: <span class="fstat-no" title="function not covered" >function(){</span>
+<span class="cstat-no" title="statement not covered" >					if(hasMethod) { <span class="cstat-no" title="statement not covered" >param(); </span>}</span>
+<span class="cstat-no" title="statement not covered" >					return self;</span>
+				},
+				onComplete: <span class="fstat-no" title="function not covered" >function( callback ){</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >					updateCallbackArray.push(callback);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >					var wrapper = <span class="fstat-no" title="function not covered" >function(){</span></span>
+<span class="cstat-no" title="statement not covered" >						compare(fileData, secondFileData);</span>
+					};
+&nbsp;
+<span class="cstat-no" title="statement not covered" >					wrapper();</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >					return getCompareApi(wrapper);</span>
+				}
+			};
+&nbsp;
+<span class="cstat-no" title="statement not covered" >			return self;</span>
+		}
+&nbsp;
+<span class="cstat-no" title="statement not covered" >		return {</span>
+			onComplete: <span class="fstat-no" title="function not covered" >function( callback ){</span>
+<span class="cstat-no" title="statement not covered" >				updateCallbackArray.push(callback);</span>
+<span class="cstat-no" title="statement not covered" >				loadImageData(fileData, <span class="fstat-no" title="function not covered" >function(imageData, width, height){</span></span>
+<span class="cstat-no" title="statement not covered" >					parseImage(imageData.data, width, height);</span>
+				});
+			},
+			compareTo: <span class="fstat-no" title="function not covered" >function(secondFileData){</span>
+<span class="cstat-no" title="statement not covered" >				return getCompareApi(secondFileData);</span>
+			}
+		};
+&nbsp;
+	};
+&nbsp;
+	resemble.outputSettings = <span class="fstat-no" title="function not covered" >function(options){</span>
+<span class="cstat-no" title="statement not covered" >		var key;</span>
+<span class="cstat-no" title="statement not covered" >		var undefined;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >		if(options.errorColor){</span>
+<span class="cstat-no" title="statement not covered" >			for (key in options.errorColor) {</span>
+<span class="cstat-no" title="statement not covered" >				errorPixelColor[key] = options.errorColor[key] === undefined ? errorPixelColor[key] : options.errorColor[key];</span>
+			}
+		}
+&nbsp;
+<span class="cstat-no" title="statement not covered" >		if(options.errorType &amp;&amp; errorPixelTransform[options.errorType] ){</span>
+<span class="cstat-no" title="statement not covered" >			errorPixel = errorPixelTransform[options.errorType];</span>
+		}
+&nbsp;
+<span class="cstat-no" title="statement not covered" >		pixelTransparency = isNaN(Number(options.transparency)) ? pixelTransparency : options.transparency;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >		if (options.largeImageThreshold !== undefined) {</span>
+<span class="cstat-no" title="statement not covered" >			largeImageThreshold = options.largeImageThreshold;</span>
+		}
+&nbsp;
+<span class="cstat-no" title="statement not covered" >		if (options.useCrossOrigin !== undefined) {</span>
+<span class="cstat-no" title="statement not covered" >			useCrossOrigin = options.useCrossOrigin;</span>
+		}
+&nbsp;
+<span class="cstat-no" title="statement not covered" >		return this;</span>
+	};
+&nbsp;
+	return resemble;
+}));
+&nbsp;
+&nbsp;</pre></td></tr>
+</table></pre>
+</div>
+<div class="footer">
+    <div class="meta">Generated by <a href="https://github.com/kaizhu256/node-utility2" target="_blank">utility2</a> at Tue Apr 18 2017 13:41:55 GMT+0000 (UTC)</div>
+</div>
+</body>
+</html>

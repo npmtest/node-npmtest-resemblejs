@@ -1,6 +1,6 @@
 # npmtest-resemblejs
 
-#### test coverage for  [resemblejs (v2.2.3)](https://github.com/Huddle/Resemble.js)  [![npm package](https://img.shields.io/npm/v/npmtest-resemblejs.svg?style=flat-square)](https://www.npmjs.org/package/npmtest-resemblejs) [![travis-ci.org build-status](https://api.travis-ci.org/npmtest/node-npmtest-resemblejs.svg)](https://travis-ci.org/npmtest/node-npmtest-resemblejs)
+#### basic test coverage for  [resemblejs (v2.2.3)](https://github.com/Huddle/Resemble.js)  [![npm package](https://img.shields.io/npm/v/npmtest-resemblejs.svg?style=flat-square)](https://www.npmjs.org/package/npmtest-resemblejs) [![travis-ci.org build-status](https://api.travis-ci.org/npmtest/node-npmtest-resemblejs.svg)](https://travis-ci.org/npmtest/node-npmtest-resemblejs)
 
 #### Image analysis and comparison with HTML5
 
@@ -10,7 +10,7 @@
 |--:|:--|
 | coverage : | [![istanbul-coverage](https://npmtest.github.io/node-npmtest-resemblejs/build/coverage.badge.svg)](https://npmtest.github.io/node-npmtest-resemblejs/build/coverage.html/index.html)|
 | test-report : | [![test-report](https://npmtest.github.io/node-npmtest-resemblejs/build/test-report.badge.svg)](https://npmtest.github.io/node-npmtest-resemblejs/build/test-report.html)|
-| build-artifacts : | [![build-artifacts](https://npmtest.github.io/node-npmtest-resemblejs/glyphicons_144_folder_open.png)](https://github.com/npmtest/node-npmtest-resemblejs/tree/gh-pages/build)|
+| test-server-github : | [![github.com test-server](https://npmtest.github.io/node-npmtest-resemblejs/GitHub-Mark-32px.png)](https://npmtest.github.io/node-npmtest-resemblejs/build/app/index.html) | | build-artifacts : | [![build-artifacts](https://npmtest.github.io/node-npmtest-resemblejs/glyphicons_144_folder_open.png)](https://github.com/npmtest/node-npmtest-resemblejs/tree/gh-pages/build)|
 
 - [https://npmtest.github.io/node-npmtest-resemblejs/build/coverage.html/index.html](https://npmtest.github.io/node-npmtest-resemblejs/build/coverage.html/index.html)
 
@@ -73,7 +73,8 @@
         "url": "git+https://github.com/Huddle/Resemble.js.git"
     },
     "scripts": {},
-    "version": "2.2.3"
+    "version": "2.2.3",
+    "bin": {}
 }
 ```
 
